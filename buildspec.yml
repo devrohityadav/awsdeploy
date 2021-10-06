@@ -10,10 +10,9 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t project:1 .
-      - docker tag project:1 $REPOSITORY_URI
+      - docker build -t $REPOSITORY_URI:latest .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI
+      - docker push $REPOSITORY_URI:latest
