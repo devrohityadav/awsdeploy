@@ -5,14 +5,14 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=515655899552.dkr.ecr.ap-south-1.amazonaws.com/khudka-server
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI .
+      - docker build -t app .
+      - docker tag app 515655899552.dkr.ecr.ap-south-1.amazonaws.com/khudka-server:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI:latest
+      - docker push 515655899552.dkr.ecr.ap-south-1.amazonaws.com/khudka-server:latest
