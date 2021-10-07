@@ -1,0 +1,165 @@
+{
+  "ipcMode": null,
+  "executionRoleArn": null,
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": null,
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 5432,
+          "protocol": "tcp",
+          "containerPort": 5432
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "POSTGRES_USER",
+          "value": "khudka_user"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "value": "khudka_pass"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "value": "khudka"
+        }
+      ],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [
+        {
+          "readOnly": null,
+          "containerPath": "/var/lib/postgresql/data",
+          "sourceVolume": "khudkafs"
+        }
+      ],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": 500,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "registry.hub.docker.com/library/postgres:13",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "khudkadb"
+    },
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": null,
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 8081,
+          "protocol": "tcp",
+          "containerPort": 8081
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "RAZORPAY_KEY_ID",
+          "value": "rzp_test_yGK3EhsFcfwEqB"
+        },
+        {
+          "name": "DATABASE_URL",
+          "value": "postgresql://khudka_user:khudka_pass@khudkadb:5432/khudka"
+        },
+        {
+          "name": "REFRESH_TOKEN_SECRET",
+          "value": "dfhasdguyfvdgsj"
+        },
+        {
+          "name": "RAZORPAY_SECRET",
+          "value": "w8kW1d7jeb0AuQFWTIvRKag6"
+        },
+        {
+          "name": "ACCESS_TOKEN_SECRET",
+          "value": "fjklbhlauisdgdfysad"
+        }
+      ],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": 400,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "IMAGE",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": [
+        {
+          "containerName": "khudkadb",
+          "condition": "START"
+        }
+      ],
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": ["khudkadb:khudkadb"],
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "khudka-server"
+    }
+  ],
+  "memory": null,
+  "taskRoleArn": null,
+  "family": "khudka-task",
+  "pidMode": null,
+  "requiresCompatibilities": ["EC2"],
+  "networkMode": null,
+  "cpu": null,
+  "inferenceAccelerators": null,
+  "proxyConfiguration": null,
+  "volumes": [
+    {
+      "fsxWindowsFileServerVolumeConfiguration": null,
+      "efsVolumeConfiguration": null,
+      "name": "khudkafs",
+      "host": {
+        "sourcePath": "/var/lib/postgresql/data/pgdata"
+      },
+      "dockerVolumeConfiguration": null
+    }
+  ],
+  "placementConstraints": [],
+  "tags": []
+}
